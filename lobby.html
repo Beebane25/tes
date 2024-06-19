@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lobby</title>
+</head>
+<body>
+    <h1>Welcome to the Lobby, {{ username }}!</h1>
+    <a href="{{ url_for('logout') }}">Logout</a>
+
+    <h2>Upload File Teks</h2>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".txt" required>
+        <button type="submit">Upload</button>
+    </form>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <h2>Data Teks</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Data</th>
+        </tr>
+        {% for data in text_data %}
+        <tr>
+            <td>{{ data.id }}</td>
+            <td><pre>{{ data.data }}</pre></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
